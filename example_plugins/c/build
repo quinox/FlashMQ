@@ -1,0 +1,9 @@
+#!/bin/bash
+set -eu
+
+set -x
+gcc -fPIC -shared exampleplugin.cpp -o exampleplugin.so
+{ set +x; } 2>/dev/null
+
+echo "Exposed callables for FlashMQ:"
+nm --extern-only exampleplugin.so | grep 'flashmq_plugin_' | sort --key=3

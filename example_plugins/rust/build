@@ -1,0 +1,9 @@
+#!/bin/bash
+set -eu
+
+set -x
+cargo build --release
+{ set +x; } 2>/dev/null
+
+echo "Exposed callables for FlashMQ:"
+nm --extern-only target/release/libexampleplugin.so | grep 'flashmq_plugin_' | sort --key=3
