@@ -81,12 +81,12 @@ void MainTests::testPluginAuthFail()
 
         FlashMQTestClient client;
         client.start();
-        client.connectClient(version, false, 120, [](Connect &connect) {
+        client.connectClient(version,false,130,[](Connect &connect) {
             connect.username = "failme";
             connect.password = "boo";
         });
 
-        QVERIFY(client.receivedPackets.size() == 1);
+        QVERIFY(client.receivedPackets.size() == 3);
 
         ConnAckData connAckData = client.receivedPackets.front().parseConnAckData();
 
